@@ -1,6 +1,6 @@
 # Datadog
 
-![Version: 2.6.10](https://img.shields.io/badge/Version-2.6.10-informational?style=flat-square) ![AppVersion: 7](https://img.shields.io/badge/AppVersion-7-informational?style=flat-square)
+![Version: 2.7.0](https://img.shields.io/badge/Version-2.7.0-informational?style=flat-square) ![AppVersion: 7](https://img.shields.io/badge/AppVersion-7-informational?style=flat-square)
 
 [Datadog](https://www.datadoghq.com/) is a hosted infrastructure monitoring platform. This chart adds the Datadog Agent to all nodes in your cluster via a DaemonSet. It also optionally depends on the [kube-state-metrics chart](https://github.com/kubernetes/charts/tree/master/stable/kube-state-metrics). For more information about monitoring Kubernetes with Datadog, please refer to the [Datadog documentation website](https://docs.datadoghq.com/agent/basic_agent_usage/kubernetes/).
 
@@ -374,7 +374,7 @@ helm install --name <RELEASE_NAME> \
 | clusterAgent.createPodDisruptionBudget | bool | `false` | Create pod disruption budget for Cluster Agent deployments |
 | clusterAgent.datadog_cluster_yaml | object | `{}` | Specify custom contents for the datadog cluster agent config (datadog-cluster.yaml) |
 | clusterAgent.dnsConfig | object | `{}` | Specify dns configuration options for datadog cluster agent containers e.g ndots |
-| clusterAgent.enabled | bool | `false` | Set this to true to enable Datadog Cluster Agent |
+| clusterAgent.enabled | bool | `true` | Set this to true to enable Datadog Cluster Agent |
 | clusterAgent.env | list | `[]` | Set environment variables specific to Cluster Agent |
 | clusterAgent.healthPort | int | `5555` | Port number to use in the Cluster Agent for the healthz endpoint |
 | clusterAgent.image.pullPolicy | string | `"IfNotPresent"` | Cluster Agent image pullPolicy |
@@ -387,7 +387,7 @@ helm install --name <RELEASE_NAME> \
 | clusterAgent.metricsProvider.enabled | bool | `false` | Set this to true to enable Metrics Provider |
 | clusterAgent.metricsProvider.service.port | int | `8443` | Set port of cluster-agent metrics server service (Kubernetes >= 1.15) |
 | clusterAgent.metricsProvider.service.type | string | `"ClusterIP"` | Set type of cluster-agent metrics server service |
-| clusterAgent.metricsProvider.useDatadogMetrics | bool | `false` | Enable usage of DatadogMetric CRD to autoscale on arbitrary Datadog queries |
+| clusterAgent.metricsProvider.useDatadogMetrics | bool | `true` | Enable usage of DatadogMetric CRD to autoscale on arbitrary Datadog queries |
 | clusterAgent.metricsProvider.wpaController | bool | `false` | Enable informer and controller of the watermark pod autoscaler |
 | clusterAgent.networkPolicy.create | bool | `false` | If true, create a NetworkPolicy for the cluster agent. DEPRECATED. Use datadog.networkPolicy.create instead |
 | clusterAgent.nodeSelector | object | `{}` | Allow the Cluster Agent Deployment to be scheduled on selected nodes |
@@ -443,15 +443,15 @@ helm install --name <RELEASE_NAME> \
 | datadog.appKey | string | `nil` | Datadog APP key required to use metricsProvider |
 | datadog.appKeyExistingSecret | string | `nil` | Use existing Secret which stores APP key instead of creating a new one |
 | datadog.checksd | object | `{}` | Provide additional custom checks as python code |
-| datadog.clusterChecks.enabled | bool | `false` | Enable the Cluster Checks feature on both the cluster-agents and the daemonset |
+| datadog.clusterChecks.enabled | bool | `true` | Enable the Cluster Checks feature on both the cluster-agents and the daemonset |
 | datadog.clusterName | string | `nil` | Set a unique cluster name to allow scoping hosts and Cluster Checks easily |
-| datadog.collectEvents | bool | `false` | Enables this to start event collection from the kubernetes API |
+| datadog.collectEvents | bool | `true` | Enables this to start event collection from the kubernetes API |
 | datadog.confd | object | `{}` | Provide additional check configurations (static and Autodiscovery) |
 | datadog.criSocketPath | string | `nil` | Path to the container runtime socket (if different from Docker) |
 | datadog.dd_url | string | `nil` | The host of the Datadog intake server to send Agent data to, only set this option if you need the Agent to send data to a custom URL |
 | datadog.dockerSocketPath | string | `nil` | Path to the docker socket |
 | datadog.dogstatsd.hostSocketPath | string | `"/var/run/datadog/"` | Host path to the DogStatsD socket |
-| datadog.dogstatsd.nonLocalTraffic | bool | `false` | Enable this to make each node accept non-local statsd traffic (from outside of the pod) |
+| datadog.dogstatsd.nonLocalTraffic | bool | `true` | Enable this to make each node accept non-local statsd traffic (from outside of the pod) |
 | datadog.dogstatsd.originDetection | bool | `false` | Enable origin detection for container tagging |
 | datadog.dogstatsd.port | int | `8125` | Override the Agent DogStatsD port |
 | datadog.dogstatsd.socketPath | string | `"/var/run/datadog/dsd.socket"` | Path to the DogStatsD socket |
@@ -465,7 +465,7 @@ helm install --name <RELEASE_NAME> \
 | datadog.hostVolumeMountPropagation | string | `"None"` | Allow to specify the `mountPropagation` value on all volumeMounts using HostPath |
 | datadog.kubeStateMetricsEnabled | bool | `true` | If true, deploys the kube-state-metrics deployment |
 | datadog.kubeStateMetricsNetworkPolicy.create | bool | `false` | If true, create a NetworkPolicy for kube state metrics |
-| datadog.leaderElection | bool | `false` | Enables leader election mechanism for event collection |
+| datadog.leaderElection | bool | `true` | Enables leader election mechanism for event collection |
 | datadog.leaderLeaseDuration | string | `nil` | Set the lease time for leader election in second |
 | datadog.logLevel | string | `"INFO"` | Set logging verbosity, valid log levels are: trace, debug, info, warn, error, critical, off |
 | datadog.logs.containerCollectAll | bool | `false` | Enable this to allow log collection for all containers |
